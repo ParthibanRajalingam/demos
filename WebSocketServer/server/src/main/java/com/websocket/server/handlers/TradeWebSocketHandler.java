@@ -19,27 +19,28 @@ public class TradeWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         float oldPrice = 0.0f;
+
+        //Publishing new stock prices every one second for 100 times
         for (int i=0; i < 100; i ++){
+            //Calculating Random stock price between 12$ to 13$
             float stockPrice = 12 + r.nextFloat() * (13 - 12);
             float roundedPrice = (float) (Math.round(stockPrice * 100.0) / 100.0);
+
+            //Creating a Stock Object
             Stock stock = new Stock("Amazon",
                     "https://cdn.cdnlogo.com/logos/a/77/amazon-dark.svg",
                     roundedPrice);
+            //Finding whether the stock pric increased or decreased
             if (roundedPrice > oldPrice){
                 stock.setIncreased(true);
             }
             oldPrice = roundedPrice;
+
+            //Sending StockPrice
             TextMessage message = new TextMessage(objectMapper.writeValueAsString(stock));
             session.sendMessage(message);
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         }
         sessions.add(session);
     }
-
-
-
-    @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-    }
-
 }
