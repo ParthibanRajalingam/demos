@@ -1,4 +1,4 @@
-package com.websocket.client.model;
+package com.websocket.server.model;
 
 public class Stock {
     String name;

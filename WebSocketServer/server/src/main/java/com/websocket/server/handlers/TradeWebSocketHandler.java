@@ -1,7 +1,7 @@
-package com.websocket.client.handlers;
+package com.websocket.server.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.websocket.client.model.Stock;
+import com.websocket.server.model.Stock;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
